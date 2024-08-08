@@ -38,9 +38,16 @@ def exibir_mobs():
         )
 
 def iniciar_batalha(mob):
-    atacar_mob(mob)
-    atacar_player(mob)
-    exibir_info_batalha(mob)
+    while player['hp'] > 0 and mob['hp'] > 0:    
+        atacar_mob(mob)
+        atacar_player(mob)
+        exibir_info_batalha(mob)
+
+    if player['hp'] > 0:
+        print(f"O {player['nome']} venceu e ganhou {mob['exp']} de EXP")
+        player['exp'] += mob['exp']
+    else:
+        print(f"O {mob['nome']} venceu")
 
 def atacar_mob(mob):
     mob['hp'] -= player['dano']
@@ -51,6 +58,7 @@ def atacar_player(mob):
 def exibir_info_batalha(mob):
     print(f"Player: {player['hp']}/{player['hp_max']}")
     print(f"MOB {mob['nome']}: {mob['hp']}/{mob['hp_max']}")
+    print("----------------------\n")
 
 gerar_mobs(5)
 # exibir_mobs()
