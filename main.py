@@ -19,6 +19,7 @@ def creat_monster(level):
         "level": level,
         "dano": 5 * level,
         "hp": 100 * level,
+        "hp_max": 100 *level,
         "exp": 7 * level,
     }
 
@@ -36,21 +37,25 @@ def exibir_mobs():
             f"Nome: {mob['nome']} // Level: {mob['level']} // Dano: {mob['dano']} // HP: {mob['hp']} // EXP: {mob['exp']}"
         )
 
-def atacar_mod(mob):
-    mob['hp'] -= player['dano']
+def iniciar_batalha(mob):
+    atacar_mob(mob)
     atacar_player(mob)
+    exibir_info_batalha(mob)
+
+def atacar_mob(mob):
+    mob['hp'] -= player['dano']
 
 def atacar_player(mob):
-    player['dano'] -= mob['hp']
+    player['hp'] -= mob['dano']
 
+def exibir_info_batalha(mob):
+    print(f"Player: {player['hp']}/{player['hp_max']}")
+    print(f"MOB {mob['nome']}: {mob['hp']}/{mob['hp_max']}")
 
 gerar_mobs(5)
 # exibir_mobs()
 
 mob_selecionado = lista_mobs[0]
 
-print("MOB selecionado =>", mob_selecionado)
-atacar_mod(mob_selecionado)
-
-print("#MOB Atacado# ", mob_selecionado)
+iniciar_batalha(mob_selecionado)
 
