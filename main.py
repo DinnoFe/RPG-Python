@@ -6,7 +6,7 @@ player = {
     "nome": "Dinno",
     "level": 1,
     "exp": 0,
-    "exp_max": 100,
+    "exp_max": 30,
     "hp": 100,
     "hp_max": 100,
     "dano": 25,
@@ -51,6 +51,15 @@ def reset_player():
 def reset_mob(mob):
      mob['hp'] = mob['hp_max']
 
+
+def level_up():
+     if player["exp"] >= player["exp_max"]:
+          player["level"] += 1
+          player["exp"] = 0
+          player["exp_max"] = player["exp_max"] * 2
+          player['hp_max'] += 20
+
+
 def iniciar_batalha(mob):
     while player['hp'] > 0 and mob['hp'] > 0:    
         atacar_mob(mob)
@@ -65,6 +74,7 @@ def iniciar_batalha(mob):
         print(f"O {mob['nome']} venceu")
         exibir_mob(mob)
 
+    level_up()
     reset_player()
     reset_mob(mob)
 
@@ -86,4 +96,10 @@ gerar_mobs(5)
 mob_selecionado = lista_mobs[0]
 
 iniciar_batalha(mob_selecionado)
+iniciar_batalha(mob_selecionado)
+iniciar_batalha(mob_selecionado)
+iniciar_batalha(mob_selecionado)
+iniciar_batalha(mob_selecionado)
+
+exibir_player()
 
