@@ -12,9 +12,8 @@ player = {
     "dano": 25,
 }
 
-def creat_monster():
-    level =randint(0, 50)
-
+def creat_monster(level):
+    
     new_mob = {
         "nome": f"Monstro #{level}#",
         "level": level,
@@ -27,19 +26,26 @@ def creat_monster():
 
 def gerar_mobs(n_mobs):  
     for x in range(n_mobs):
-        new_mob = creat_monster()
+        new_mob = creat_monster(x + 1)
         lista_mobs.append(new_mob)
+
+
 def exibir_mobs():
     for mob in lista_mobs:
         print(
-            f"Nome: {mob['nome']} // Level: {mob['level']} // Dano: {mob['dano']} // HP: {mob['hp']}"
+            f"Nome: {mob['nome']} // Level: {mob['level']} // Dano: {mob['dano']} // HP: {mob['hp']} // EXP: {mob['exp']}"
         )
 
 def atacar_mod(mob):
     mob['hp'] -= player['dano']
+    atacar_player(mob)
+
+def atacar_player(mob):
+    player['dano'] -= mob['hp']
+
 
 gerar_mobs(5)
-exibir_mobs()
+# exibir_mobs()
 
 mob_selecionado = lista_mobs[0]
 
