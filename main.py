@@ -33,9 +33,23 @@ def gerar_mobs(n_mobs):
 
 def exibir_mobs():
     for mob in lista_mobs:
+        exibir_mobs(mob)   
+
+def exibir_mob(mob):
         print(
             f"Nome: {mob['nome']} // Level: {mob['level']} // Dano: {mob['dano']} // HP: {mob['hp']} // EXP: {mob['exp']}"
         )
+
+def exibir_player():
+        print(
+            f"Nome: {player['nome']} // Level: {player['level']} // Dano: {player['dano']} // HP: {player['hp']} // {player['hp_max']} // EXP: {player['exp']} // {player['exp_max']}"
+        )
+
+def reset_player():
+     player['hp'] = player['hp_max']
+
+def reset_mob(mob):
+     mob['hp'] = mob['hp_max']
 
 def iniciar_batalha(mob):
     while player['hp'] > 0 and mob['hp'] > 0:    
@@ -46,8 +60,14 @@ def iniciar_batalha(mob):
     if player['hp'] > 0:
         print(f"O {player['nome']} venceu e ganhou {mob['exp']} de EXP")
         player['exp'] += mob['exp']
+        exibir_player()
     else:
         print(f"O {mob['nome']} venceu")
+        exibir_mob(mob)
+
+    reset_player()
+    reset_mob(mob)
+
 
 def atacar_mob(mob):
     mob['hp'] -= player['dano']
